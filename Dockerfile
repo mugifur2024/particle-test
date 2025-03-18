@@ -1,17 +1,4 @@
-# Use the official Ubuntu image as the base image
-FROM ubuntu
+FROM tomcat:9
 
-# Install Nginx
-RUN apt update && apt install -y nginx && apt clean
-
-# Remove the default Nginx configuration file (optional, if needed)
-#RUN rm /etc/nginx/sites-enabled/default
-
-# Copy a custom Nginx configuration file (optional)
-# COPY ./nginx.conf /etc/nginx/nginx.conf
-
-# Expose the Nginx default HTTP port
-EXPOSE 80
-
-# Start Nginx in the foreground
-CMD ["nginx", "-g", "daemon off;"]
+# Copy all .war files from the current directory to the webapps directory of Tomcat
+COPY **/*.war /usr/local/tomcat/webapps/
